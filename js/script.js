@@ -15,10 +15,18 @@ let
 	todoCompletedElem = document.querySelector('.todo-completed'),
 	// смена туду листа
 	todoСompleteElem = document.querySelector('.todo-complete');
-	// удаление туду листа
-	// todoRemoveElem = document.querySelector('.todo-remove');
 
-let todoData = [];
+
+// отправть в localStorage метод 
+let setState = function () {
+    localStorage.setItem('todoData', JSON.stringify(todoData));
+};
+// получить из localStorage
+let getState = function () {
+	return JSON.parse(localStorage.getItem('todoData'));
+};
+
+let todoData =  [];
 
 // рендер страницы
 let render = function () {
@@ -49,14 +57,15 @@ let render = function () {
 		// смена статуса туду листа
         let todoCompleteBtn = li.querySelector('.todo-complete');
         todoCompleteBtn.addEventListener('click', function () {
-            item.completed = !item.completed;
+			item.completed = !item.completed;
+			setState();
             render();
 		});
 		// удаление одного из элементов туду листа
 		let todoRemoveElem = li.querySelector('.todo-remove');
-		console.log('todoRemoveElem: ', todoRemoveElem);
 		todoRemoveElem.addEventListener('click', function () {
-			todoData = todoData.splice();
+			todoData.splice(index, 1);
+			setState();
 			render();
 		});
     });
@@ -77,6 +86,7 @@ todoControlElem.addEventListener('submit', function (event) {
 		// очищение поле воода для туду листа после добовление их в сам туду лист 
 		headerInputElem.value = '';
 		// запуск функции 
+		setState();
 		render();
     }
 });
