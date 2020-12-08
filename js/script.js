@@ -81,7 +81,6 @@ todoControlElem.addEventListener('submit', function (event) {
         todoData.push({
             value: headerInputElem.value,
 			completed: false,
-			// id: todoData.length + 1
 		});
 		// очищение поле воода для туду листа после добовление их в сам туду лист 
 		headerInputElem.value = '';
