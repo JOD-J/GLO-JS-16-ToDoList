@@ -26,7 +26,7 @@ let getState = function () {
 	return JSON.parse(localStorage.getItem('todoData'));
 };
 
-let todoData =  [];
+let todoData = getState() ? getState(): [];
 
 // рендер страницы
 let render = function () {
